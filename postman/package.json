@@ -1,0 +1,10 @@
+{
+  "name": "futurex-postman",
+  "version": "1.0.0",
+  "scripts": {
+    "run-postman": "newman run FutureX.postman_collection.json -e FutureX.postman_environment.json"
+  },
+  "devDependencies": {
+    "newman": "^5.3.0"
+  }
+}

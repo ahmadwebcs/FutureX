@@ -1,0 +1,145 @@
+{
+  "auth_token": {
+    "description": "Form-encoded body for token request (POST /api/token-auth/)",
+    "content_type": "application/x-www-form-urlencoded",
+    "body": {
+      "username": "admin@example.com",
+      "password": "adminpass"
+    }
+  },
+
+  "investor_register": {
+    "description": "Register a new investor (POST /api/investors/register/)",
+    "content_type": "application/json",
+    "body": {
+      "name": "Test Investor",
+      "cnic": "12345-1234567-1",
+      "email": "test.investor@example.com",
+      "phone": "03001234567",
+      "address": "123 Example Street",
+      "password": "StrongP@ssw0rd"
+    }
+  },
+
+  "investor_update": {
+    "description": "Partial update investor (PATCH /api/investors/investors/{pk}/)",
+    "content_type": "application/json",
+    "body": {
+      "phone": "03111234567",
+      "address": "New address 45"
+    }
+  },
+
+  "kyc_upload_note": {
+    "description": "KYC upload requires multipart form-data (POST /api/investors/kyc-docs/). Use form-data keys as below and attach a file for `file`.",
+    "content_type": "multipart/form-data",
+    "form_data": {
+      "investor": "<INVESTOR_PK>",
+      "name": "CNIC Front Scan",
+      "file": "(choose file)"
+    }
+  },
+
+  "digital_signature": {
+    "description": "Save a digital signature (POST /api/investors/signatures/)",
+    "content_type": "application/json",
+    "body": {
+      "investor": "<INVESTOR_PK>",
+      "document": "<KYCDOC_ID>",
+      "signature_data": "data:image/svg+xml;base64,PHN2ZyB..."
+    }
+  },
+
+  "onboarding_approval_create": {
+    "description": "Create an onboarding approval record (POST /api/investors/approvals/)",
+    "content_type": "application/json",
+    "body": {
+      "investor": "<INVESTOR_PK>",
+      "approved": false,
+      "reviewed_by": "",
+      "notes": "Initial review pending"
+    }
+  },
+
+  "onboarding_approval_approve": {
+    "description": "Approve onboarding (PATCH /api/investors/approvals/{pk}/)",
+    "content_type": "application/json",
+    "body": {
+      "approved": true,
+      "reviewed_by": "Compliance Officer",
+      "notes": "KYC documents verified"
+    }
+  },
+
+  "add_investment": {
+    "description": "Add investment (POST /api/investments/add/)",
+    "content_type": "application/json",
+    "body": {
+      "investor": "<INVESTOR_PK>",
+      "college": "<COLLEGE_PK>",
+      "amount": 1000.00,
+      "share_percentage": 0.0
+    }
+  },
+
+  "investment_partial_update": {
+    "description": "Update investment (PATCH /api/investments/investments/{pk}/)",
+    "content_type": "application/json",
+    "body": {
+      "amount": 1200.00
+    }
+  },
+
+  "withdrawal_request": {
+    "description": "Request a withdrawal (POST /api/investments/withdrawals/)",
+    "content_type": "application/json",
+    "body": {
+      "investor": "<INVESTOR_PK>",
+      "amount": 200.00
+    }
+  },
+
+  "generate_monthly_roi_note": {
+    "description": "Monthly ROI generation is a management command. Run locally: python manage.py generate_monthly_roi",
+    "command": "python manage.py generate_monthly_roi"
+  },
+
+  "forecast_generate": {
+    "description": "Generate naive forecast for investor (POST /api/finance/forecasts/generate/)",
+    "content_type": "application/json",
+    "body": {
+      "investor": "<INVESTOR_PK>",
+      "months": 12
+    }
+  },
+
+  "create_payment": {
+    "description": "Create a payment schedule manually (POST /api/finance/payments/)",
+    "content_type": "application/json",
+    "body": {
+      "investor": "<INVESTOR_PK>",
+      "investment": "<INVESTMENT_PK>",
+      "amount": 20.00,
+      "due_date": "2025-12-15"
+    }
+  },
+
+  "mark_payment_paid": {
+    "description": "Mark payment as paid (PATCH /api/finance/payments/{pk}/)",
+    "content_type": "application/json",
+    "body": {
+      "paid": true,
+      "paid_at": "2025-12-15"
+    }
+  },
+
+  "create_statement": {
+    "description": "Create a statement for investor (POST /api/finance/statements/)",
+    "content_type": "application/json",
+    "body": {
+      "investor": "<INVESTOR_PK>",
+      "content": "{\"ledger\": [{\"date\": \"2025-12-01\", \"amount\": 1000.0}] }"
+    }
+  }
+
+}
