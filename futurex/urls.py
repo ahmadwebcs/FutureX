@@ -18,4 +18,5 @@ urlpatterns = [
     # Accept both with and without trailing slash to avoid RuntimeError
     path('api/token-auth', obtain_auth_token),
     path('api/token-auth/', obtain_auth_token),
+    path('', include('apps.academic.urls')),
 ]
