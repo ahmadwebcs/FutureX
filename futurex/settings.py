@@ -16,9 +16,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
+    'drf_yasg',
     'apps.investors',
     'apps.investments.apps.InvestmentsConfig',
     'apps.finance',
+    'apps.admissions.apps.AdmissionsConfig',
 ]
 
 # Use the custom Investor model as the AUTH_USER_MODEL
@@ -112,4 +114,3 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-    
